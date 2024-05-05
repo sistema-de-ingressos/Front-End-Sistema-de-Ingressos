@@ -26,7 +26,7 @@ export const ImageContainer = styled.div`
 
 export const Body = styled.div`
     display: flex;
-    padding: 0px 15px;
+    padding: 0 15px;
     flex-direction: column;
     align-items: center;
     gap: 10px;

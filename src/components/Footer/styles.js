@@ -11,7 +11,7 @@ export const FooterContainer = styled.footer`
     
     & p {
         color: var(--branco-primario);
-        font-size: 18px;
+        font-size: 14px;
         font-style: normal;
         font-weight: 400;
     }
