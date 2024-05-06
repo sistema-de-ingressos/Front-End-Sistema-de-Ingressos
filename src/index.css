@@ -22,6 +22,9 @@ body, html, div#root {
   --cinza-secundario: #818181;
   --cinza-terciario: #D9D9D9;
   --branco-primario: #FFFFFF;
+
+  /* Cor das setas do carrossel */
+  --swiper-theme-color: var(--cinza-secundario) !important;
 }
 
 a {
@@ -35,4 +38,8 @@ button {
   font-family: inherit;
   cursor: pointer;
   transition: 0.25s;
+
+  &:focus {
+    outline: none;
+  }
 }
