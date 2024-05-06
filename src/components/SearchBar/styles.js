@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const SearchContainer = styled.div`
+export const SearchContainer = styled("search")`
     display: flex;
     justify-content: space-between;
     padding: 5px 5px 5px 20px;

@@ -4,6 +4,7 @@ import {LuCalendarDays} from "react-icons/lu";
 import {IoTimeOutline} from "react-icons/io5";
 import {PiMoneyFill} from "react-icons/pi";
 import {Body, CardButton, ImageContainer, Informations, VerticalCardContainer} from "./styles.js";
+import {EventDetails} from "../../EventDetails/EventDetails.jsx";
 
 export function VerticalEventCard({nome, img, local, data, horario, preco, id}) {
     return (
@@ -34,7 +35,8 @@ export function VerticalEventCard({nome, img, local, data, horario, preco, id}) 
                     </TextInfo>
                 </Informations>
             </Body>
-            <CardButton>Ver Mais</CardButton>
+            <EventDetails button={<CardButton>Ver Mais</CardButton>} eventId={id}/>
+
 
 
         </VerticalCardContainer>

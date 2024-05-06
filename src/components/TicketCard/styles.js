@@ -32,10 +32,11 @@ export const Button = styled.a`
     background-color: var(--azul-primario);
     transition: 0.25s;
     border-radius: 7px;
+    filter: brightness(160%);
     
     
     &:hover {
-        filter: brightness(160%);
+        filter: brightness(100%);
     }
     
 `
