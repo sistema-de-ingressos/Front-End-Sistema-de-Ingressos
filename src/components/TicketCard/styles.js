@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const TicketContainer = styled.div`
     display: flex;
+    width: inherit;
     justify-content: space-between;
     align-items: center;
     padding: 5px 5px 5px 20px;
@@ -9,19 +10,34 @@ export const TicketContainer = styled.div`
     border-radius: 12px;
 `
 
-export const Nome = styled.h3`
-    font-size: 16px;
-    font-weight: 500;
-`
-
 export const Info = styled.div`
     display: flex;
     gap: 10px;
     align-items: center;
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 400;
     color: var(--preto);
 `
+
+export const Nome = styled(Info)`
+    width: 40%;
+    font-size: 18px;
+    font-weight: 500;
+`
+
+export const Data = styled(Info)`
+    width: 20%;
+`
+
+export const Valor = styled(Info)`
+    width: 20%;
+`
+
+export const Buttons = styled(Info)`
+    width: fit-content;
+    justify-content: flex-end;
+`
+
 
 export const Button = styled.a`
     display: flex;
@@ -32,10 +48,12 @@ export const Button = styled.a`
     background-color: var(--azul-primario);
     transition: 0.25s;
     border-radius: 7px;
+    filter: brightness(160%);
     
     
     &:hover {
-        filter: brightness(160%);
+        cursor: pointer;
+        filter: brightness(100%);
     }
     
 `
