@@ -1,21 +1,15 @@
-import {
-    CardButton,
-    Header,
-    HorizontalCardContainer,
-    ImageContainer,
-    LineWrapper,
-    TextContainer,
-} from "./styles.js";
+import {CardButton, Header, HorizontalCardContainer, ImageContainer, LineWrapper, TextContainer,} from "./styles.js";
 import {Image, Price, TextInfo, Title} from "../styles.js";
 import {FaMapMarkerAlt} from "react-icons/fa";
 import {LuCalendarDays} from "react-icons/lu";
 import {IoTimeOutline} from "react-icons/io5";
 import {PiMoneyFill} from "react-icons/pi";
+import {EventDetails} from "../../EventDetails/EventDetails.jsx";
 
 
-export function HorizontalEventCard({nome, img, local, data, horario, preco, id}) {
+export function HorizontalEventCard({key, nome, img, local, data, horario, preco, id}) {
     return (
-        <HorizontalCardContainer key={id}>
+        <HorizontalCardContainer key={key}>
             <ImageContainer>
                 <Image src={img ? img : "https://picsum.photos/200"}/>
             </ImageContainer>
@@ -43,9 +37,7 @@ export function HorizontalEventCard({nome, img, local, data, horario, preco, id}
                         </Price>
                     </TextInfo>
                 </Header>
-                <CardButton>
-                    Ver Mais
-                </CardButton>
+                <EventDetails eventId={id} button={ <CardButton>Ver Mais</CardButton> }/>
             </TextContainer>
         </HorizontalCardContainer>
 

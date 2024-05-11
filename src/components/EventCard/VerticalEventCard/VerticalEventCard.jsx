@@ -1,4 +1,4 @@
-import {Image, TextInfo, Title, Price} from "../styles.js";
+import {Image, Price, TextInfo, Title} from "../styles.js";
 import {FaMapMarkerAlt} from "react-icons/fa";
 import {LuCalendarDays} from "react-icons/lu";
 import {IoTimeOutline} from "react-icons/io5";
