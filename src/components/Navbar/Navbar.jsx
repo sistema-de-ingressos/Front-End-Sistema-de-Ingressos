@@ -24,7 +24,7 @@ export function Navbar() {
 
     return (
         <NavbarContainer>
-            <NavbarLogo href="/">Nome do Sistema</NavbarLogo>
+            <NavbarLogo href="/">TicketFlow</NavbarLogo>
             <NavbarLinks>
                 {navbarLinks.map((link, index) =>
                     <NavbarLink key={index} to={link.to}>{link.nome}</NavbarLink>
