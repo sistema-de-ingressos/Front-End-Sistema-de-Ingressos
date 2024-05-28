@@ -8,8 +8,6 @@ import {PaginaPrincipal} from "./pages/PaginaPrincipal/PaginaPrincipal.jsx";
 import {Eventos} from "./pages/Eventos/Eventos.jsx";
 import {MeusIngressos} from "./pages/MeusIngressos/MeusIngressos.jsx";
 import {ComprarIngresso} from "./pages/ComprarIngresso/ComprarIngresso.jsx";
-import {Login} from "./pages/Login/Login.jsx";
-import {Cadastro} from "./pages/Cadastro/Cadastro.jsx";
 
 const router = createBrowserRouter([
     {
@@ -22,30 +20,22 @@ const router = createBrowserRouter([
                 children: [
                     {
                         path:"",
-                        element: <PaginaPrincipal/>,
+                        element: <PaginaPrincipal title={"Página Principal"}/>,
                     },
                     {
                         path:"eventos",
-                        element: <Eventos/>,
+                        element: <Eventos title={"Eventos"}/>,
                     },
                     {
                         path:"meus-ingressos",
-                        element: <MeusIngressos/>,
+                        element: <MeusIngressos title={"Meus Ingressos"}/>,
                     },
                     {
                         path:"comprar-ingresso/:idEvento",
-                        element: <ComprarIngresso/>
+                        element: <ComprarIngresso title={"Comprar Ingresso"}/>
                     }
                 ]
-            },
-            {
-                path: "login",
-                element: <Login/>,
-            },
-            {
-                path: "cadastro",
-                element: <Cadastro/>
-            },
+            }
         ]
     }
 ])
