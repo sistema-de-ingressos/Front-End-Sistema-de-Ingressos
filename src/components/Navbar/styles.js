@@ -14,7 +14,15 @@ export const NavbarLogo = styled.a`
     font-size: 25px;
     color: var(--branco-primario);
     font-weight: 700;
+    display: flex;
+    align-items: center;
+    padding: 5px 0;
 `;
+
+export const NavbarImage = styled.img`
+    height: 40px;
+    object-fit: cover;
+`
 
 export const NavbarLinks = styled.nav`
     display: flex;
@@ -24,7 +32,7 @@ export const NavbarLinks = styled.nav`
 
 export const NavbarLink = styled(Link)`
     font-family: Inter, sans-serif;
-    font-size: 16px;
+    font-size: 18px;
     color: var(--branco-primario);
     font-weight: 400;
     padding: 8px 10px;
