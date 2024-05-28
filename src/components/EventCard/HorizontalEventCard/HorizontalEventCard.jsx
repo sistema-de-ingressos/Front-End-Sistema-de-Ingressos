@@ -7,11 +7,11 @@ import {PiMoneyFill} from "react-icons/pi";
 import {EventDetails} from "../../EventDetails/EventDetails.jsx";
 
 
-export function HorizontalEventCard({key, nome, img, local, data, horario, preco, id}) {
+export function HorizontalEventCard({key, nome, imagemDestaque, local, data, horario, valorAtual, id}) {
     return (
         <HorizontalCardContainer key={key}>
             <ImageContainer>
-                <Image src={img ? img : "https://picsum.photos/200"}/>
+                <Image src={imagemDestaque ? `data:image/jpeg;base64,${imagemDestaque}` : "http://via.placeholder.com/200"}/>
             </ImageContainer>
             <TextContainer>
                 <Header>
@@ -33,7 +33,7 @@ export function HorizontalEventCard({key, nome, img, local, data, horario, preco
                     <TextInfo>
                         <PiMoneyFill size={25}/>
                         <Price>
-                            {preco ? "R$ " + preco : "Gratuito"}
+                            {valorAtual ? "R$ " + valorAtual : "Gratuito"}
                         </Price>
                     </TextInfo>
                 </Header>

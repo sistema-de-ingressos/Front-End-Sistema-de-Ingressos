@@ -1,11 +1,35 @@
 import {SearchHeader} from "../../components/SearchHeader/SearchHeader.jsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {EventosPageContainer, EventosWrapper} from "./styles.js";
 import {HorizontalEventCard} from "../../components/EventCard/HorizontalEventCard/HorizontalEventCard.jsx";
+import {buscarEventos} from "../../services/apiService.js";
+import {useQuery} from "@tanstack/react-query";
+import {useTitle} from "../../utils/useTitle.js";
 
-export function Eventos() {
-    const [input, setInput] = useState();
+export function Eventos({title}) {
+    const [input, setInput] = useState("");
     const [eventos, setEventos] = useState([])
+    useTitle(title)
+
+    const {data} = useQuery({
+        queryKey: ["eventos", "busca"],
+        queryFn: () =>  buscarEventos(""),
+    })
+
+    useEffect(() => {
+        if (data) {
+            setEventos(data);
+        }
+    }, [data]);
+
+    const handleSubmit = async () => {
+        try {
+            const response = await buscarEventos(input)
+            setEventos(response)
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     return (
         <EventosPageContainer>
@@ -15,67 +39,21 @@ export function Eventos() {
                 placeholder={"Busque eventos pelo nome"}
                 padding={"25%"}
                 onChange={(e) => setInput(e.target.value)}
-
-                // Ainda será implementado requisição de busca para API
-                handleSubmit={() => console.log(input)}
+                handleSubmit={handleSubmit}
             />
             <EventosWrapper>
-                {eventos.map((evento, index) =>
+                {eventos ? eventos.map((evento, index) =>
                     <HorizontalEventCard
                         key={index}
+                        imagemDestaque={evento.imagemDestaque}
                         id={evento.id}
                         nome={evento.nome}
                         data={evento.data}
                         horario={evento.horario}
                         local={evento.local}
-                        preco={evento.preco}
+                        valorAtual={evento.valorAtual}
                     />
-                )}
-                <HorizontalEventCard
-                    key={1}
-                    id={1}
-                    nome={"Nome do Evento"}
-                    data={"12/04"}
-                    horario={"12:00"}
-                    local={"Local do Evento"}
-                    preco={"15,00"}
-                />
-                <HorizontalEventCard
-                    key={1}
-                    id={1}
-                    nome={"Nome do Evento"}
-                    data={"12/04"}
-                    horario={"12:00"}
-                    local={"Local do Evento"}
-                    preco={"15,00"}
-                />
-                <HorizontalEventCard
-                    key={1}
-                    id={1}
-                    nome={"Nome do Evento"}
-                    data={"12/04"}
-                    horario={"12:00"}
-                    local={"Local do Evento"}
-                    preco={"15,00"}
-                />
-                <HorizontalEventCard
-                    key={1}
-                    id={1}
-                    nome={"Nome do Evento"}
-                    data={"12/04"}
-                    horario={"12:00"}
-                    local={"Local do Evento"}
-                    preco={"15,00"}
-                />
-                <HorizontalEventCard
-                    key={1}
-                    id={1}
-                    nome={"Nome do Evento"}
-                    data={"12/04"}
-                    horario={"12:00"}
-                    local={"Local do Evento"}
-                    preco={"15,00"}
-                />
+                ) : <p>Nenhum evento encontrado</p>}
             </EventosWrapper>
         </EventosPageContainer>
     )

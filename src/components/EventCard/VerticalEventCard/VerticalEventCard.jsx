@@ -6,11 +6,11 @@ import {PiMoneyFill} from "react-icons/pi";
 import {Body, CardButton, ImageContainer, Informations, VerticalCardContainer} from "./styles.js";
 import {EventDetails} from "../../EventDetails/EventDetails.jsx";
 
-export function VerticalEventCard({nome, img, local, data, horario, preco, id}) {
+export function VerticalEventCard({nome, imagemDestaque, local, data, horario, valorAtual, id}) {
     return (
         <VerticalCardContainer key={id}>
             <ImageContainer>
-                <Image src={img ? img : "https://picsum.photos/300/200"}/>
+                <Image src={imagemDestaque ? `data:image/jpeg;base64,${imagemDestaque}` : "http://via.placeholder.com/200"}/>
             </ImageContainer>
             <Body>
                 <Title>{nome}</Title>
@@ -30,7 +30,7 @@ export function VerticalEventCard({nome, img, local, data, horario, preco, id}) 
                     <TextInfo>
                         <PiMoneyFill size={25}/>
                         <Price>
-                            {preco ? "R$ " + preco : "Gratuito"}
+                            {valorAtual ? "R$ " + valorAtual : "Gratuito"}
                         </Price>
                     </TextInfo>
                 </Informations>
