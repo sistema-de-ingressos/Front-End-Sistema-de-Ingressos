@@ -3,8 +3,10 @@ import {LuCalendarDays} from "react-icons/lu";
 import {PiMoneyFill} from "react-icons/pi";
 import {TbQrcode} from "react-icons/tb";
 import {CgMoreO} from "react-icons/cg";
+import {EventDetails} from "../EventDetails/EventDetails.jsx";
+import {QRCodeImage} from "../QRCodeImage/QRCodeImage.jsx";
 
-export function TicketCard({key, nome, data, valor, qrCodeLink}) {
+export function TicketCard({key, nome, data, total, qrCodeLink, eventId}) {
     return (
         <TicketContainer key={key}>
             <Nome>{nome}</Nome>
@@ -14,15 +16,17 @@ export function TicketCard({key, nome, data, valor, qrCodeLink}) {
             </Data>
             <Valor>
                 <PiMoneyFill size={20}/>
-                {valor}
+                R$ {total}
             </Valor>
             <Buttons>
-                <QrButton href={qrCodeLink}>
-                    <TbQrcode size={22}/>
-                </QrButton>
-                <Button>
-                    <CgMoreO size={22}/>
-                </Button>
+                <QRCodeImage
+                    button={ <QrButton> <TbQrcode size={22}/> </QrButton> }
+                    qrCodeLink={qrCodeLink}
+                />
+                <EventDetails
+                    button={<Button> <CgMoreO size={22}/> </Button>}
+                    eventId={eventId}
+                />
             </Buttons>
         </TicketContainer>
     )

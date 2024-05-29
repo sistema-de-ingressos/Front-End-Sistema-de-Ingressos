@@ -34,7 +34,7 @@ export function MeusIngressos({title}) {
                     <UserTitle>Eventos de {cliente.nome}</UserTitle>
                     <IngressosContainer>
                         {cliente.ingressos ? cliente.ingressos.map((ingresso, index) =>
-                            <TicketCard key={index} nome={ingresso.nome} data={ingresso.data} valor={ingresso.valor} qrCodeLink={ingresso.qrCodeLink}/>
+                            <TicketCard key={index} nome={ingresso.nomeDoEvento} data={ingresso.dataDoEvento} total={ingresso.total} qrCodeLink={ingresso.url} eventId={ingresso.idDoEvento}/>
                         ) : <p>Nenhum ingresso disponível</p>}
                     </IngressosContainer>
                 </ContentContainer>
