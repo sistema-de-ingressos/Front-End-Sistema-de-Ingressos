@@ -1,8 +1,10 @@
 import {axiosInstance} from "./axiosInstance.js";
 
 
-export const buscarEventos = async (dadosBusca) => {
-    const response = await axiosInstance.get(`/eventos/buscar/${dadosBusca}`)
+export const buscarEventos = async (filtro) => {
+    const response = await axiosInstance.get(`/eventos/buscar`, {
+        params: {filtro: filtro}
+    })
     return response.data
 }
 
@@ -13,11 +15,6 @@ export const getEventosDestaque = async () => {
 
 export const getEventosProximos = async () => {
     const response = await axiosInstance.get("/eventos/proximos")
-    return response.data
-}
-
-export const getIngressos =  async (idPessoa) => {
-    const response =  await axiosInstance.get(`/ingressos/busca/${idPessoa}`)
     return response.data
 }
 
