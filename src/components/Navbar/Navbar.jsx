@@ -1,4 +1,5 @@
-import {NavbarContainer, NavbarLink, NavbarLinks, NavbarLogo} from "./styles.js";
+import {NavbarContainer, NavbarImage, NavbarLink, NavbarLinks, NavbarLogo} from "./styles.js";
+import logo from '../../assets/images/logo.svg'
 
 export function Navbar() {
 
@@ -14,17 +15,15 @@ export function Navbar() {
         {
             nome: "Meus Ingressos",
             to: "/meus-ingressos",
-        },
-        {
-            nome: "Administrador",
-            to: "/login",
-        },
+        }
     ]
 
 
     return (
         <NavbarContainer>
-            <NavbarLogo href="/">TicketFlow</NavbarLogo>
+            <NavbarLogo href="/">
+                <NavbarImage alt={"Logo da TicketFlow"} src={logo}/>
+            </NavbarLogo>
             <NavbarLinks>
                 {navbarLinks.map((link, index) =>
                     <NavbarLink key={index} to={link.to}>{link.nome}</NavbarLink>

@@ -2,36 +2,44 @@ import {ContentContainer, IngressosContainer, MeusIngressosContainer, UserTitle}
 import {useState} from "react";
 import {TicketCard} from "../../components/TicketCard/TicketCard.jsx";
 import {SearchHeader} from "../../components/SearchHeader/SearchHeader.jsx";
+import {buscarIngressoPorCpf} from "../../services/apiService.js";
+import {useTitle} from "../../utils/useTitle.js";
 
-export function MeusIngressos() {
+export function MeusIngressos({title}) {
     const [cpf, setCPF] =  useState()
-    const [usuario, setUsuario] =  useState({
-        nome: 'João Arthur',
-        ingressos: [],
-    })
+    const [cliente, setCliente] =  useState()
+    useTitle(title)
+
+    const handleSubmit = async () => {
+        try {
+            const response = await buscarIngressoPorCpf(cpf)
+            setCliente(response)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
 
     return (
         <MeusIngressosContainer>
             <SearchHeader
                 title={"Meus Ingressos"}
-                subtitle={"Digite seu CPF para buscar seus ingressos:"}
-                placeholder={"XXX.XXX.XXX-XX"}
+                subtitle={"Busque seus ingressos disponíveis através do seu CPF:"}
+                placeholder={"Digite seu CPF"}
                 onChange={(e) => setCPF(e.target.value)}
-                // Ainda será implementado requisição de busca para API
-                handleSubmit={() => console.log(cpf)}
+                handleSubmit={handleSubmit}
             />
-            <ContentContainer>
-                <UserTitle>Eventos de {usuario.nome}</UserTitle>
-                <IngressosContainer>
-                    {usuario.ingressos.map((ingresso, index) =>
-                        <TicketCard key={index} nome={ingresso.nome} data={ingresso.data} valor={ingresso.valor} qrCodeLink={ingresso.qrCodeLink}/>
-                    )}
-                    <TicketCard data={"13/04"} nome={"Nome do Evento"} valor={"R$ 12,00"} key={1}/>
-                    <TicketCard data={"12/04"} nome={"Nome do Evento"} valor={"R$ 12,00"} key={1}/>
-                    <TicketCard data={"12/04"} nome={"Nome do Evento"} valor={"R$ 12,00"} key={1}/>
-                    <TicketCard data={"12/04"} nome={"Nome do Evento"} valor={"R$ 12,00"} key={1}/>
-                </IngressosContainer>
-            </ContentContainer>
+            {cliente && (
+                <ContentContainer>
+                    <UserTitle>Eventos de {cliente.nome}</UserTitle>
+                    <IngressosContainer>
+                        {cliente.ingressos ? cliente.ingressos.map((ingresso, index) =>
+                            <TicketCard key={index} nome={ingresso.nomeDoEvento} data={ingresso.dataDoEvento} total={ingresso.total} qrCodeLink={ingresso.url} eventId={ingresso.idDoEvento}/>
+                        ) : <p>Nenhum ingresso disponível</p>}
+                    </IngressosContainer>
+                </ContentContainer>
+            )}
+
         </MeusIngressosContainer>
     )
 }

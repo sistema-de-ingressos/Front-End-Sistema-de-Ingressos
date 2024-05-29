@@ -11,16 +11,16 @@ import {
 import {useState} from "react";
 import axios from "axios";
 import {CustomInput} from "../CustomInput/CustomInput.jsx";
-import {comprarIngresso} from "../../services/apiService.js";
+import {comprarIngresso, getDetalhesCliente} from "../../services/apiService.js";
 import {SuccessModal} from "../SuccessModal/SuccessModal.jsx";
 import {useDisclosure} from "@chakra-ui/react";
 
-export function TicketFormSection({ idEvento }) {
+export function TicketFormSection({ total, idEvento }) {
 
     const [formData, setFormData] = useState({
         nome: null,
         cpf: null,
-        dataNascimento: null,
+        dataDeNascimento: null,
         endereco: {
             cep: null,
             logradouro: null,
@@ -29,20 +29,23 @@ export function TicketFormSection({ idEvento }) {
             cidade: null,
             complemento: null,
             numero: null,
-        }
+        },
+        idEvento: idEvento,
+        total: total
     })
+
     const [erro, setErro] = useState();
     const { isOpen: isOpenSuccess, onOpen: onOpenSuccess, onClose: onCloseSuccess } = useDisclosure();
 
-    const checkCEP = async (event) => {
+    const checkCEP = async (value) => {
         try {
-            const response = await axios.get(`https://viacep.com.br/ws/${event.target.value}/json/`);
+            const response = await axios.get(`https://viacep.com.br/ws/${value}/json/`);
             const responseData = response.data;
-            setFormData((prevFormData) => ({
+            setFormData(prevFormData => ({
                 ...prevFormData,
                 endereco: {
                     ...prevFormData.endereco,
-                    cep: event.target.value,
+                    cep: value,
                     logradouro: responseData.logradouro,
                     bairro: responseData.bairro,
                     estado: responseData.uf,
@@ -54,10 +57,34 @@ export function TicketFormSection({ idEvento }) {
         }
     };
 
+    const checkCPF = async (value) => {
+        try {
+            const customerData = await getDetalhesCliente(value);
+            console.log(customerData)
+            if (customerData) {
+                setFormData(prevFormData => ({
+                    ...prevFormData,
+                    nome: customerData.nome,
+                    dataDeNascimento: customerData.dataDeNascimento,
+                    endereco: {
+                        ...prevFormData.endereco,
+                        ...customerData.endereco,
+                    }
+                }));
+            }
+
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     const handleInputChange = (event) => {
         const { name, value } = event.target;
         if (name === "cep") {
-            checkCEP(event);
+            checkCEP(value);
+        }
+        if (name === "cpf") {
+            checkCPF(value);
         }
         setFormData((prevFormData) => ({
             ...prevFormData,
@@ -78,15 +105,15 @@ export function TicketFormSection({ idEvento }) {
             name: "cpf",
             label: "CPF",
             value: formData.cpf,
-            placeholder: "XXX.XXX.XXX-XX",
+            placeholder: "Digite seu CPF",
+            mask: "99999999999",
             size: "md",
-            mask: "999.999.999-99",
             required: true,
         },
         {
-            name: "dataNascimento",
+            name: "dataDeNascimento",
             label: "Data de nascimento",
-            value: formData.dataNascimento,
+            value: formData.dataDeNascimento,
             placeholder: "dd/mm/aaaa",
             size: "sm",
             mask: "99/99/9999",
