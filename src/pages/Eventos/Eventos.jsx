@@ -12,8 +12,8 @@ export function Eventos({title}) {
     useTitle(title)
 
     const {data} = useQuery({
-        queryKey: ["eventos", "busca"],
-        queryFn: () =>  buscarEventos(""),
+        queryKey: ["eventos", input],
+        queryFn: () =>  buscarEventos(input),
     })
 
     useEffect(() => {

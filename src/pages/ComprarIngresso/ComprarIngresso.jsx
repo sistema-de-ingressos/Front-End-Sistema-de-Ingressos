@@ -10,19 +10,10 @@ export function ComprarIngresso({title}) {
     const {idEvento} = useParams();
     useTitle(title)
 
-    const {data: evento} = useQuery({
-        queryKey: ["evento", idEvento],
-        queryFn: () => getDetalhesCarrinho(idEvento)
-    })
-
     return (
         <ComprarIngressoContainer>
-            {evento && (
-                <>
-                    <EventSection evento={evento} />
-                    <TicketFormSection total={evento.total} idEvento={idEvento} />
-                </>
-            )}
+            <EventSection idEvento={idEvento} />
+            <TicketFormSection idEvento={idEvento} />
         </ComprarIngressoContainer>
     )
 }
