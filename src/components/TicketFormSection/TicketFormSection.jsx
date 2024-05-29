@@ -15,7 +15,7 @@ import {comprarIngresso, getDetalhesCliente} from "../../services/apiService.js"
 import {SuccessModal} from "../SuccessModal/SuccessModal.jsx";
 import {useDisclosure} from "@chakra-ui/react";
 
-export function TicketFormSection({ idEvento }) {
+export function TicketFormSection({ total, idEvento }) {
 
     const [formData, setFormData] = useState({
         nome: null,
@@ -29,7 +29,9 @@ export function TicketFormSection({ idEvento }) {
             cidade: null,
             complemento: null,
             numero: null,
-        }
+        },
+        idEvento: idEvento,
+        total: total
     })
 
     const [erro, setErro] = useState();

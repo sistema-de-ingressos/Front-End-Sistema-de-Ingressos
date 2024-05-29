@@ -8,7 +8,7 @@ import {
     useDisclosure
 } from "@chakra-ui/react";
 import {IoIosCloseCircleOutline} from "react-icons/io";
-import {ImageContainer, Image} from "./styles.js";
+import {Image, ImageContainer} from "./styles.js";
 import {cloneElement} from "react";
 
 
