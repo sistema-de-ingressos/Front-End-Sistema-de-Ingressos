@@ -16,7 +16,7 @@ import {SuccessModal} from "../SuccessModal/SuccessModal.jsx";
 import {useDisclosure} from "@chakra-ui/react";
 import {useNavigate} from "react-router-dom";
 
-export function TicketFormSection({ total, idEvento }) {
+export function TicketFormSection({ idEvento }) {
     const navigate = useNavigate()
     const [erro, setErro] = useState();
     const { isOpen: isOpenSuccess, onOpen: onOpenSuccess, onClose: onCloseSuccess } = useDisclosure();
@@ -34,8 +34,7 @@ export function TicketFormSection({ total, idEvento }) {
             complemento: null,
             numero: null,
         },
-        idEvento: idEvento,
-        total: total
+        idEvento: idEvento
     })
 
     const checkCEP = async (value) => {
