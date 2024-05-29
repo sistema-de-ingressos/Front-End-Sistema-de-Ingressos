@@ -14,8 +14,12 @@ import {CustomInput} from "../CustomInput/CustomInput.jsx";
 import {comprarIngresso, getDetalhesCliente} from "../../services/apiService.js";
 import {SuccessModal} from "../SuccessModal/SuccessModal.jsx";
 import {useDisclosure} from "@chakra-ui/react";
+import {useNavigate} from "react-router-dom";
 
 export function TicketFormSection({ total, idEvento }) {
+    const navigate = useNavigate()
+    const [erro, setErro] = useState();
+    const { isOpen: isOpenSuccess, onOpen: onOpenSuccess, onClose: onCloseSuccess } = useDisclosure();
 
     const [formData, setFormData] = useState({
         nome: null,
@@ -33,9 +37,6 @@ export function TicketFormSection({ total, idEvento }) {
         idEvento: idEvento,
         total: total
     })
-
-    const [erro, setErro] = useState();
-    const { isOpen: isOpenSuccess, onOpen: onOpenSuccess, onClose: onCloseSuccess } = useDisclosure();
 
     const checkCEP = async (value) => {
         try {
@@ -187,6 +188,11 @@ export function TicketFormSection({ total, idEvento }) {
         }
     }
 
+    const handleClose = async () => {
+        onCloseSuccess()
+        navigate("/")
+    }
+
     return (
         <TicketFormSectionContainer>
             <FormSection>
@@ -211,7 +217,7 @@ export function TicketFormSection({ total, idEvento }) {
                 <Erro>{erro}</Erro>
                 <SubmitButton onClick={handleSubmit}>Finalizar Compra</SubmitButton>
             </FinalSection>
-            <SuccessModal isOpen={isOpenSuccess} onClose={onCloseSuccess} text={"Compra realizada com sucesso!"}/>
+            <SuccessModal isOpen={isOpenSuccess} onClose={handleClose} text={"Compra realizada com sucesso!"}/>
         </TicketFormSectionContainer>
     );
 }
