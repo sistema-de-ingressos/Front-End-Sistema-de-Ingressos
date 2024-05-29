@@ -1,0 +1,32 @@
+# Etapa de construção do frontend
+FROM arm64v8/node:16 AS build
+
+# Define o diretório de trabalho
+WORKDIR /app
+
+# Copia os arquivos do projeto
+COPY package*.json ./
+
+# Instala as dependências do projeto
+RUN npm install
+
+# Copia o restante dos arquivos do projeto
+COPY . .
+
+# Constrói a aplicação
+RUN npm run build
+
+# Etapa de produção do frontend
+FROM arm64v8/nginx:alpine
+
+# Define o diretório de trabalho
+WORKDIR /usr/share/nginx/html
+
+# Copia os arquivos construídos para o diretório padrão do Nginx
+COPY --from=build /app/dist .
+
+# Exponha a porta que o Nginx está escutando
+EXPOSE 80
+
+# Comando padrão para iniciar o Nginx
+CMD ["nginx", "-g", "daemon off;"]
