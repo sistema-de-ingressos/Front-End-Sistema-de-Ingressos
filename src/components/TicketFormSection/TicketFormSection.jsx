@@ -60,7 +60,6 @@ export function TicketFormSection({ idEvento }) {
     const checkCPF = async (value) => {
         try {
             const customerData = await getDetalhesCliente(value);
-            console.log(customerData)
             if (customerData) {
                 setFormData(prevFormData => ({
                     ...prevFormData,
@@ -72,7 +71,6 @@ export function TicketFormSection({ idEvento }) {
                     }
                 }));
             }
-
         } catch (error) {
             console.log(error);
         }
@@ -82,15 +80,27 @@ export function TicketFormSection({ idEvento }) {
         const { name, value } = event.target;
         if (name === "cep") {
             checkCEP(value);
-        }
-        if (name === "cpf") {
+        } else if (name === "cpf") {
             checkCPF(value);
         }
-        setFormData((prevFormData) => ({
-            ...prevFormData,
-            [name]: value,
-        }));
+
+        if (["cep", "logradouro", "bairro", "cidade", "estado", "numero", "complemento"].includes(name)) {
+            setFormData((prevFormData) => ({
+                ...prevFormData,
+                endereco: {
+                    ...prevFormData.endereco,
+                    [name]: value,
+                }
+            }));
+        } else {
+            setFormData((prevFormData) => ({
+                ...prevFormData,
+                [name]: value,
+            }));
+        }
+        console.log(formData)
     };
+
 
     const dadosPessoaisInputs = [
         {
@@ -179,7 +189,7 @@ export function TicketFormSection({ idEvento }) {
 
     const handleSubmit = async () => {
         try {
-            await comprarIngresso(formData, idEvento);
+            await comprarIngresso(formData);
 
             onOpenSuccess()
         } catch (error) {
@@ -213,7 +223,7 @@ export function TicketFormSection({ idEvento }) {
                 </SecaoDados>
             </FormSection>
             <FinalSection>
-                <Erro>{erro}</Erro>
+                <Erro>{erro && "Ocorreu um erro, tente novamente!"}</Erro>
                 <SubmitButton onClick={handleSubmit}>Finalizar Compra</SubmitButton>
             </FinalSection>
             <SuccessModal isOpen={isOpenSuccess} onClose={handleClose} text={"Compra realizada com sucesso!"}/>
