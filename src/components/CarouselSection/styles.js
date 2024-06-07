@@ -9,7 +9,7 @@ export const SectionContainer = styled.div`
     
     & > div {
         width: 100%;
-        height: 400px;
+        height: 450px;
         padding: 0 50px;
     }
 `

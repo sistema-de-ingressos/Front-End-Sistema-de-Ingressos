@@ -3,7 +3,8 @@ import styled from "styled-components";
 export const HorizontalCardContainer = styled.div`
     display: flex;
     width: 412px;
-    height: 200px;
+    min-height: 200px;
+    max-height: 500px;
     justify-content: space-between;
     overflow: hidden;
     border-radius: 36px;

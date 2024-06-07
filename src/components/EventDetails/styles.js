@@ -49,11 +49,13 @@ export const TituloEvento = styled.h2`
     color: var(--preto);
     font-size: 20px;
     font-weight: 700;
+    max-width: 350px;
 `
 
 export const ComprarButton = styled(Link)`
     color: var(--branco-primario);
     display: flex;
+    max-width: 280px;
     padding: 10px 40px;
     justify-content: center;
     align-items: center;

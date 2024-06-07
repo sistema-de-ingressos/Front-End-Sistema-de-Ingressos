@@ -5,9 +5,9 @@ export const VerticalCardContainer = styled.div`
     flex-direction: column;
     border-radius: 38px;
     background-color: var(--cinza-primario);
-    box-shadow: 4px 4px 20.7px 0 rgba(0, 0, 0, 0.25);
+    box-shadow: 4px 4px 20px 0 rgba(0, 0, 0, 0.25);
     width: 310px;
-    height: 370px;
+    height: 420px;
     padding-bottom: 15px;
     justify-content: space-between;
     align-items: center;
