@@ -47,7 +47,7 @@ export function EventDetails({button, eventId}) {
             {cloneElement(button, {onClick: onOpen})}
 
             {evento && (
-                <Modal isOpen={isOpen} size={"xl"} isCentered scrollBehavior={"inside"} onClose={onClose}>
+                <Modal isOpen={isOpen} size={"3xl"} isCentered scrollBehavior={"inside"} onClose={onClose}>
                     <ModalOverlay />
                     <ModalContent height={550} p={2} borderRadius={20}>
                         <ModalHeader></ModalHeader>
@@ -58,16 +58,17 @@ export function EventDetails({button, eventId}) {
                             <ContentWrapper>
                                 <CarouselContainer>
                                     <Carousel arrows infinite autoplay>
-                                        {evento.imagens && evento.imagens.length > 0 && (
+                                        {evento.imagens && evento.imagens.length > 0 ? (
                                             evento.imagens.map((imagem, index) => (
                                                 <ImageContainer key={index}>
                                                     <Image src={`data:image/jpeg;base64,${imagem}`} alt={`Evento imagem ${index}`} />
                                                 </ImageContainer>
                                             ))
+                                        ): (
+                                            <ImageContainer>
+                                                <Image src="http://via.placeholder.com/530x250?text=Não%20Possui%20Imagem" />
+                                            </ImageContainer>
                                         )}
-                                        <ImageContainer>
-                                            <Image src="http://via.placeholder.com/530x250" />
-                                        </ImageContainer>
 
                                     </Carousel>
                                 </CarouselContainer>

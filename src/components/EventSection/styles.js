@@ -9,7 +9,10 @@ export const EventoSectionContainer = styled.div`
     align-items: center;
     gap: 75px;
     align-self: stretch;
+    height: max-content;
+    min-height: 100%;
     background-color: var(--cinza-primario);
+    
 `
 
 export const CarrinhoWrapper = styled.div`
