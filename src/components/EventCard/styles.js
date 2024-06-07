@@ -23,4 +23,9 @@ export const Title = styled.h2`
     color: var(--preto);
     font-size: 19px;
     font-weight: 700;
+    text-align: center;
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
 `
