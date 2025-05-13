@@ -33,6 +33,7 @@ import {FaMapMarkerAlt} from "react-icons/fa";
 import {BsFillPeopleFill} from "react-icons/bs";
 import {getDetalhesEvento} from "../../services/apiService.js";
 import {useQuery} from "@tanstack/react-query";
+import {formatNumberToBRL} from "../../utils/numberUtils.js";
 
 export function EventDetails({button, eventId}) {
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -66,7 +67,7 @@ export function EventDetails({button, eventId}) {
                                             ))
                                         ): (
                                             <ImageContainer>
-                                                <Image src="http://via.placeholder.com/530x250?text=Não%20Possui%20Imagem" />
+                                                <Image src="https://placehold.co/530x250?text=Não+Possui+Imagem" />
                                             </ImageContainer>
                                         )}
 
@@ -97,7 +98,7 @@ export function EventDetails({button, eventId}) {
                                         <Section>
                                             <Info>
                                                 <PiMoneyFill />
-                                                {evento.valorAtual ? ` R$ ${evento.valorAtual} ` : "Gratuito"}
+                                                {evento.valorAtual ? formatNumberToBRL(evento.valorAtual) : "Gratuito"}
                                             </Info>
                                             <Info>
                                                 <BsFillPeopleFill />

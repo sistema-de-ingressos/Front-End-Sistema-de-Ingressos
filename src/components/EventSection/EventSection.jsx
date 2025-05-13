@@ -21,6 +21,7 @@ import {
 } from "./styles.js";
 import {useQuery} from "@tanstack/react-query";
 import {getDetalhesCarrinho} from "../../services/apiService.js";
+import {formatNumberToBRL} from "../../utils/numberUtils.js";
 
 export function EventSection({idEvento}) {
     const { data: evento, error } = useQuery({
@@ -39,24 +40,24 @@ export function EventSection({idEvento}) {
                     <CarrinhoTitle>Carrinho</CarrinhoTitle>
                     <IngressoCarrinho>
                         <Text fontSize={"12px"} fontWeight={"500"}>1x - Ingresso para {evento.nomeDoEvento}</Text>
-                        <Text fontSize={"14px"} fontWeight={"500"}>{evento.valor ? ` R$ ${evento.valor} ` : "Gratuito"}</Text>
+                        <Text fontSize={"14px"} fontWeight={"500"}>{evento.valor ? formatNumberToBRL(evento.valor) : "Gratuito"}</Text>
                     </IngressoCarrinho>
                     <AuxiliarSection>
                         <CarrinhoLabel>Subtotal:</CarrinhoLabel>
-                        <CarrinhoText> {evento.valor ? ` R$ ${evento.valor} ` : "Gratuito"}</CarrinhoText>
+                        <CarrinhoText> {evento.valor ? formatNumberToBRL(evento.valor) : "Gratuito"}</CarrinhoText>
                     </AuxiliarSection>
                     <AuxiliarSection>
                         <CarrinhoLabel>Taxa:</CarrinhoLabel>
-                        <CarrinhoText>{evento.taxa ? ` R$ ${evento.taxa} ` : "Gratuito"}</CarrinhoText>
+                        <CarrinhoText>{evento.taxa ? formatNumberToBRL(evento.taxa) : "Gratuito"}</CarrinhoText>
                     </AuxiliarSection>
                     <AuxiliarSection>
                         <CarrinhoTotal>Total:</CarrinhoTotal>
-                        <CarrinhoTotal>{evento.total ? ` R$ ${evento.total} ` : "Gratuito"}</CarrinhoTotal>
+                        <CarrinhoTotal>{evento.total ? formatNumberToBRL(evento.total) : "Gratuito"}</CarrinhoTotal>
                     </AuxiliarSection>
                 </CarrinhoWrapper>
                 <EventoWrapper>
                     <ImagemWrapper>
-                        <Image src={evento.imagemDestaque ? `data:image/jpeg;base64,${evento.imagemDestaque}` : "http://via.placeholder.com/530x250"} alt="Event" />
+                        <Image src={evento.imagemDestaque ? `data:image/jpeg;base64,${evento.imagemDestaque}` : "https://placehold.co/530x250/FFF/A6A6A6"} alt="Event" />
                     </ImagemWrapper>
                     <TextWrapper>
                         <Title>{evento.nomeDoEvento}</Title>
@@ -76,7 +77,7 @@ export function EventSection({idEvento}) {
                             </Info>
                             <Info>
                                 <InfoTitle>Valor</InfoTitle>
-                                <InfoText>{evento.valor ? ` R$ ${evento.valor} ` : "Gratuito"}</InfoText>
+                                <InfoText>{evento.valor ? formatNumberToBRL(evento.valor) : "Gratuito"}</InfoText>
                             </Info>
                         </InformationsWrapper>
                     </TextWrapper>

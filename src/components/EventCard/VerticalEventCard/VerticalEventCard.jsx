@@ -5,12 +5,13 @@ import {IoTimeOutline} from "react-icons/io5";
 import {PiMoneyFill} from "react-icons/pi";
 import {Body, CardButton, ImageContainer, Informations, VerticalCardContainer} from "./styles.js";
 import {EventDetails} from "../../EventDetails/EventDetails.jsx";
+import {formatNumberToBRL} from "../../../utils/numberUtils.js";
 
 export function VerticalEventCard({nome, imagemDestaque, local, data, horario, valorAtual, id}) {
     return (
         <VerticalCardContainer key={id}>
             <ImageContainer>
-                <Image src={imagemDestaque ? `data:image/jpeg;base64,${imagemDestaque}` : "http://via.placeholder.com/200"}/>
+                <Image src={imagemDestaque ? `data:image/jpeg;base64,${imagemDestaque}` : "https://placehold.co/200/D1D1D1/EEE"}/>
             </ImageContainer>
             <Body>
                 <Title>{nome}</Title>
@@ -30,7 +31,7 @@ export function VerticalEventCard({nome, imagemDestaque, local, data, horario, v
                     <TextInfo>
                         <PiMoneyFill size={25}/>
                         <Price>
-                            {valorAtual ? "R$ " + valorAtual : "Gratuito"}
+                            {valorAtual ? formatNumberToBRL(valorAtual)  : "Gratuito"}
                         </Price>
                     </TextInfo>
                 </Informations>
